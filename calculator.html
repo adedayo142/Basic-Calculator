@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<style>
+		table{
+			width: 100px;
+			background-color: white;
+			margin: 12px auto;
+		}
+		td{
+			width: 25px;
+		}
+		button{
+			width: 100px;
+			height: 70px;
+			font-size: 25px;
+			background-color: white;
+			border: none;
+		}
+		#inputLabel{
+			height: 120px;
+			font-size: 40px;
+			vertical-align: bottom;
+			text-align: right;
+			padding-right: 16px;
+		
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<table border="1" cellspacing="0">
+			<tr>
+				<td colspan="4">
+					<input type="text" placeholder="0"  disabled id="inputLabel">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<button onclick="edit()">AC</button>
+				</td>
+				<td>
+					<button onclick="pushOp('/')">/</button>
+				</td>
+			</tr>
+			<tr>
+				<td><button onclick="pushBtn(7)">7</button></td>
+				<td><button onclick="pushBtn(8)">8</button></td>
+				<td><button onclick="pushBtn(9)">9</button></td>
+				<td><button onclick="pushOp('*')">*</button></td>
+			</tr>
+			<tr>
+				<td><button onclick="pushBtn(4)">4</button></td>
+				<td><button onclick="pushBtn(5)">5</button></td>
+				<td><button onclick="pushBtn(5)">6</button></td>
+				<td><button onclick="pushOp('-')">-</button></td>
+			</tr>
+			<tr>
+				<td><button onclick="pushBtn(1)">1</button></td>
+				<td><button onclick="pushBtn(2)">2</button></td>
+				<td><button onclick="pushBtn(3)">3</button></td>
+				<td><button onclick="pushOp('+')">+</button></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button onclick="pushBtn(0)">0</button></td>
+				<td><button onclick="pushBtn('.')">.</button></td>
+				<td><button onclick="calculate()">=</button></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
+<script>
+	let fn, op, sn, ans;
+	// var screen = document.getElementById('inputLabel').value
+
+	function pushBtn(params){
+		fn =  params
+		document.getElementById('inputLabel').value += fn
+	}
+
+	function pushOp(dave){
+		op = dave
+		sn = document.getElementById('inputLabel').value
+		sn = Number(sn)
+		if( document.getElementById('inputLabel').value == '' && dave != '-'){
+			return
+		}else if( document.getElementById('inputLabel').value != '' &&  document.getElementById('inputLabel').value == op){
+			op = false
+		}
+		
+		console.log(op);
+		console.log(fn);
+		document.getElementById('inputLabel').value += op
+
+	}
+
+	function calculate(){
+		// alert()
+		if(op == '+'){
+			ans = fn + sn
+		}else if(op == '-'){
+			ans =sn -fn
+		}else if(op == '*'){
+			ans = fn * sn
+		}else if(op == '/'){
+			ans = sn / fn
+		}
+		document.getElementById('inputLabel').value = ans;
+	console.log(ans);
+	}
+	console.log(ans);
+	function edit(){
+		document.getElementById('inputLabel').value = ''
+	}
+
+	function dot() {
+
+	}
+</script>
+<!-- 
+let inputLabel = document.getElementById('inputLabel')
+
+	function pushBtn(obj) {
+		var pushed = obj.innerHTML 
+		if (pushed == '=') {
+			inputLabel.innerHTML = eval(inputLabel.innerHTML)
+		} else if (pushed == 'AC') {
+			inputLabel.innerHTML = '0'
+		} else {
+			if (inputLabel.innerHTML == '0') {
+				inputLabel.innerHTML = pushed
+			} else {
+				inputLabel.innerHTML += pushed
+			}
+		}
+	} -->
+
+<!-- <style>
+	.container {
+		max-width: 400px;
+		margin: 10vh auto 0 auto;
+		box-shadow: 0px 0px 43px 17px rgba(153, 153, 153, 1);
+	}
+	#display{
+		text-align: right;
+		height: 50px;
+		line-height: 50px;
+		padding: 16px 8px;
+		font-size: 25px;
+	}
+	#buttons{
+		display: grid;
+		border-bottom: 1px solid blue;
+		border-left: 1px solid #999;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	#buttons > div{
+		border-top: 1px solid #999;
+		border-right: 1px solid #999;
+	}
+	.button{
+		border:1px solid #999;
+		line-height: 50px;
+		text-align: center;
+		font-size: 25px;
+		cursor: pointer;
+	}
+	#equal{
+		background-color: #5555ff;
+		color: white;
+	}
+	.button:hover{
+		background-color: #323330;
+		color: white;
+		transition: 0.5s ease-in-out;
+	}
+</style>
+
+<section>
+	<div class="container">
+		<div id="display"></div>
+		<div id="buttons">
+			<div class="button" onclick="on('15')">7</div>
+			<div class="button" onclick="on('14')">8</div>
+			<div class="button" onclick="on('13')">9</div>
+			<div class="button" onclick="on('12')">/</div>
+			<div class="button" onclick="on('11')">4</div>
+			<div class="button" onclick="on('10')">5</div>
+			<div class="button" onclick="on('9')">6</div>
+			<div class="button" onclick="on('8')">*</div>
+			<div class="button" onclick="on('7')">1</div>
+			<div class="button" onclick="on('6')">2</div>
+			<div class="button" onclick="on('5')">3</div>
+			<div class="button" onclick="on('4')">-</div>
+			<div class="button" onclick="on('3')">0</div>
+			<div class="button" onclick="on('2')">.</div>
+			<div class="button" onclick="on('1')" >+</div>
+			<div id="equal" class="button" onclick="show()">=</div>
+	
+		</div>
+	</div>
+	</section> -->
